@@ -1,11 +1,13 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+   <ex-input></ex-input>
+    
+
   </div>
 </template>
 
 <script>
+import $ from 'jquery'  
 export default {
   name: 'App'
 }
