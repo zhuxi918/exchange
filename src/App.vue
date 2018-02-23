@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-    <div>汇率计算</div>
-   <ex-input v-for="coin of coins" :kind="coin"></ex-input>
-    <div>1111</div>
-    
+    <router-view></router-view>
+    <button @click="toCoins()">选择币种</button>
   </div>
 </template>
 
@@ -13,6 +11,7 @@ export default {
   name: 'App',
   data(){
     return{
+      main:{code: "",text: ""},
       coins:[
         {code: "RMB",text: "人民币"},
         {code: "USD",text: "美元"},
@@ -23,8 +22,19 @@ export default {
     }
   },
   mounted(){
-    console.log(coins);
+  
     
+  },
+  methods:{
+    toCoins(){
+      this.$router.push({
+        path: 'coins',
+        name: 'coins',
+        params: {
+          coins: this.coins
+        }
+      })
+    }
   }
 }
 </script>
