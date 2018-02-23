@@ -1,7 +1,8 @@
 
 <template>
     <div>
-        <ex-input v-for="coin of coins" :kind="coin"></ex-input>
+        <ex-input v-for="(coin,index) of coins" :kind="coin" :index="index" @trans="chose" :main="main"></ex-input>
+        <!-- 父与子传方法用@ -->
         <br>
        <div>123</div>
     </div>
@@ -10,7 +11,7 @@
     export default {
          data() {
                     return {
-                        main: { code: "", text: "" },
+                        main: null,
                         coins: [
                             { code: "RMB", text: "人民币" },
                             { code: "USD", text: "美元" },
@@ -19,6 +20,12 @@
                             { code: "HKD", text: "港币" },
                         ]
                     }
-                }
+                },
+        methods:{
+            chose(index){
+                this.main=this.coins[index];
+                
+            }
+        }
     } 
 </script>
