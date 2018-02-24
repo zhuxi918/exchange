@@ -1,7 +1,10 @@
 <template>
     <div>
         <h3>请选择添加的币种</h3>
-        <div v-for="c of chosen">{{c.code}}</div>
+        <div class="row" v-for="c of chosen">
+            <span>{{c.text}}</span>   
+            <span>{{c.code}}</span> 
+        </div>
     </div>
 </template>  
 <script>
@@ -10,11 +13,26 @@
         data(){
             return{
                 chosen:[],
+                other:[
+                    // {code:,text:}
+                ]
             }
         },
         created(){
-        console.log(this);
+        
             this.chosen=this.$route.params.coins
+            console.log(this.choiisen);
+            
         }
     }
 </script>  
+<style> 
+    .row{
+        display: flex;
+        justify-content: space-between;
+        padding: 2vw;
+    }
+    .row > span{
+        display: block;
+    }
+</style>

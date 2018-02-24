@@ -2,42 +2,63 @@
 <template>
     <div class="container" :class="{active: this.kind.code==this.main.code }" @click="handle()" >
         <label for="input">{{coin.text}}</label>
-        <input id="input" type="text" v-model="number"/>
+        <input id="input" type="number" v-model="number"/>
     </div>
 </template>
 <script>
     export default {
-        props:["kind","index","main"],
+        props:["kind","index","main","rate"],
         data(){
             return{
                 coin:this.kind,
                 number:null,
-                MySwitch:false
+                MySwitch:false,
+                ownRate:0,
             }
         },
+        updated(){
+            for (const key in this.rate) {
+                    if (  key == this.kind.code) {
+                        this.ownRate=this.rate[key]
+                        
+                        break
+                    }
+                }
+                if (this.kind.code == this.main.code) {
+                    this.$emit("getCur",this.number)
+                }
+        },
         methods: {
-            handle(){
-                
+            handle(){              
                 this.$emit("trans",this.index)
-                console.log(this.kind);
-                console.log(this.main.code);
+                
                 
             }
-        }
+        },
+        // watch:{
+        //     main(){
+        //         if (this.kind.code == !this.main.code) {
+        //             this.number=null;
+        //         }
+        //         console.log(this.number)
+        //     }
+        // }
     } 
 </script>
 <style>
     .container{
         width: 96%;
-        border: 1px solid red;
+        /* border: 1px solid red; */
         display: flex;
         justify-content: space-between;
         height: 10vh;
         line-height: 10vh;
         padding: 2%;
+        border-bottom: 1px solid #aaa;
     }
     .active{
-        background: #bbb
+        background: #eee;
+        box-shadow: slategrey .5vw .5vw;
     }
     input{
         display: block;
@@ -47,6 +68,7 @@
         outline: none;
         padding: 5%;
         font-size: 2em;
+        background-color: transparent;
     }
     label{
 
