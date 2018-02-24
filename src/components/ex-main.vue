@@ -11,7 +11,7 @@
     export default {
          data() {
                     return {
-                        main: null,
+                        main: {code: "RMB", text: "人民币"},
                         coins: [
                             { code: "RMB", text: "人民币" },
                             { code: "USD", text: "美元" },
