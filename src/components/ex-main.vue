@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <ex-input v-for="(coin,index) of coins" :kind="coin" :index="index" @trans="chose" :main="main" :rate="rates" @getCur="getCur"></ex-input>
+        <ex-input v-for="(coin,index) of coins" :kind="coin" :index="index" @trans="chose" :main="main" :rate="rates" @getCur="getCur" :curCoin="curCoin"></ex-input>
         <!-- 父与子传方法用@ -->
         <br>
        <div>123</div>

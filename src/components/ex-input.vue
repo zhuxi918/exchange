@@ -2,12 +2,12 @@
 <template>
     <div class="container" :class="{active: this.kind.code==this.main.code }" @click="handle()" >
         <label for="input">{{coin.text}}</label>
-        <input id="input" type="number" v-model="number"/>
+        <input id="input" type="number" v-model="number" @blur="handleBlur()"/>
     </div>
 </template>
 <script>
     export default {
-        props:["kind","index","main","rate"],
+        props:["kind","index","main","rate","curCoin"],
         data(){
             return{
                 coin:this.kind,
@@ -26,13 +26,18 @@
                 }
                 if (this.kind.code == this.main.code) {
                     this.$emit("getCur",this.number)
+                }else{
                 }
+                console.log(this.curCoin);
+                
+                
         },
         methods: {
             handle(){              
-                this.$emit("trans",this.index)
-                
-                
+                this.$emit("trans",this.index) 
+            },
+            handleBlur(){
+                this.number=null;
             }
         },
         // watch:{
@@ -43,6 +48,14 @@
         //         console.log(this.number)
         //     }
         // }
+        watch:{
+            curCoin:function(){
+                if (this.kind.code != this.main.code) {
+
+                    this.number=this.curCoin*this.ownRate
+                }
+            }
+        }
     } 
 </script>
 <style>
